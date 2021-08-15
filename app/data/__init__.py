@@ -28,6 +28,6 @@ def data_source(source):
     elif source.lower() = "nyt":
         return location.createNYT()
     else:
-        return location.getDefault()
+        return location.createJHU()
     
     #return DATA_SOURCES.get(source.lower())
