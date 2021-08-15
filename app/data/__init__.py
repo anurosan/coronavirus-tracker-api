@@ -23,9 +23,9 @@ def data_source(source):
     
     location = LocationServiceFactory()
     
-    if source.lower() = "csbs":
+    if source.lower() == "csbs":
         return location.createCSBS()
-    elif source.lower() = "nyt":
+    elif source.lower() == "nyt":
         return location.createNYT()
     else:
         return location.createJHU()
