@@ -19,11 +19,11 @@ def data_source(source):
     :returns: The service.
     :rtype: LocationService
     """
-    if source = "csbs":
+    if source.lower() = "csbs":
         return CSBSLocationService()
-    elif source = "nyt":
-        return NYTLocation Service()
+    elif source.lower() = "nyt":
+        return NYTLocationService()
     else:
         return JhuLocationService()
     
-    return DATA_SOURCES.get(source.lower())
+    #return DATA_SOURCES.get(source.lower())
