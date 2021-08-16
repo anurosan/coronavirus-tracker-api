@@ -12,5 +12,15 @@ def data_source(source):
 
     :returns: The service.
     :rtype: LocationService
-    """   
-    return DataSource.getService(source)
+    """  
+    
+    exists = False
+    
+    for i in DATA_SOURCES:
+        if DATA_SOURCES.index[i] == source:
+            exists = True
+   
+    if exists == True:
+        return DataSource.getService(source)
+    else:
+        return DataSource.getService("jhu")
