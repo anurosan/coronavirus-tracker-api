@@ -1,6 +1,6 @@
 """app.data"""
 
-from ..services.location.Singleton import LocationService
+from ..services.location.Singleton import LocationServices
 
 
 def data_source(source):
@@ -11,7 +11,7 @@ def data_source(source):
     :rtype: LocationService
     """
     
-    location = LocationService()
+    location = LocationServices()
     
     if source.lower() == "csbs":
         return location.createCSBS()
