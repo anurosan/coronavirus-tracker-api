@@ -32,9 +32,11 @@ class LocationServiceFactory(LocationService):
         return locations[loc_id]
       
 BASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/2019-nCoV/master/csse_covid_19_data/csse_covid_19_time_series/"
+something = "jhu"
 
 @cached(cache=TTLCache(maxsize=1, ttl=1800))
-def createJHU():
+async def createJHU():
+    something = "jhu"
     data_id = "jhu.locations"
     LOGGER.info(f"pid:{PID}: {data_id} Requesting data...")
 
@@ -96,7 +98,8 @@ def createJHU():
   return locations
     
 @cached(cache=TTLCache(maxsize=1, ttl=1800))
-def createCSBS():
+async def createCSBS():
+  something = "csbs"
   BASE_URL = "https://facts.csbs.org/covid-19/covid19_county.csv"
   data_id = "csbs.locations"
   LOGGER.info(f"{data_id} Requesting data...")
@@ -146,7 +149,8 @@ def createCSBS():
   return locations
     
 @cached(cache=TTLCache(maxsize=1, ttl=1800))    
-def createNYT():
+async def createNYT():
+  something = "nyt"
   BASE_URL = "https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv" 
   data_id = "nyt.locations"
   LOGGER.info(f"{data_id} Requesting data...")
@@ -316,3 +320,14 @@ async def get_category(category):
 
     LOGGER.info(f"{data_id} results:\n{pf(results, depth=1)}")
     return results
+
+@cached(cache=TTLCache(maxsize=1, ttl=1800))
+async def get_locations():
+  thisTemp = LocationServiceFactory()
+  if something == "nyt":
+    return thisTemp.createNYT()
+  elif something == "csbs":
+    return thisTemp.createCSBS()
+  else:
+    return thisTemp.createJHU()
+  
