@@ -1,17 +1,7 @@
 """app.data"""
-#from ..services.location.csbs import CSBSLocationService
-#from ..services.location.jhu import JhuLocationService
-#from ..services.location.nyt import NYTLocationService
-from ..services.location.locationFactory import LocationServiceFactory
 
-# Mapping of services to data-sources.
-"""
-DATA_SOURCES = {
-    "jhu": JhuLocationService(),
-    "csbs": CSBSLocationService(),
-    "nyt": NYTLocationService(),
-}
-"""
+from ..services.location.Singleton import LocationService
+
 
 def data_source(source):
     """
@@ -21,7 +11,7 @@ def data_source(source):
     :rtype: LocationService
     """
     
-    location = LocationServiceFactory()
+    location = LocationService()
     
     if source.lower() == "csbs":
         return location.createCSBS()
@@ -30,4 +20,3 @@ def data_source(source):
     else:
         return location.createJHU()
     
-    #return DATA_SOURCES.get(source.lower())
