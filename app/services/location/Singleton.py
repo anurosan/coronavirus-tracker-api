@@ -1,4 +1,4 @@
-"""app.services.location.locationFactory.py"""
+"""app.services.location.Singleton.py"""
 import csv
 import logging
 import os
@@ -18,9 +18,9 @@ from ...utils import date as date_util
 from ...utils import httputils
 from . import LocationService
 
-LOGGER = logging.getLogger("services.location.locationFactory")
+LOGGER = logging.getLogger("services.location.Singleton")
 
-class LocationServiceFactory(LocationService):
+class LocationServices(LocationService):
   async def get_all(self):
         # Get the locations.
         locations = await get_locations()
@@ -323,7 +323,7 @@ async def get_category(category):
 
 @cached(cache=TTLCache(maxsize=1, ttl=1800))
 async def get_locations():
-  thisTemp = LocationServiceFactory()
+  thisTemp = LocationServices()
   if something == "nyt":
     return thisTemp.createNYT()
   elif something == "csbs":
